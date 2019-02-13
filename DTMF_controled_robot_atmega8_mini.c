@@ -1,7 +1,3 @@
-// Project name : DTMF controlled robot for Atmega8 mini
-// Compile Date : 31/10/2011 Time : (16:21)
-// Designed By  : ROBOSAPIENS INDIA 
-//                http://www.robosapiensindia.com
 /* Program for "DTMF controlled robot" 
  ___________________________________________________
 Connection settings of Kit
