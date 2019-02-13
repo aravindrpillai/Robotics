@@ -1,0 +1,184 @@
+
+* clc   -> for clearing the  scerrn (like cls in dos)
+
+
+* disp('some text here');
+* disp(variable); 		// without quots..
+
+* input('Enter a number : ');	// accepts only a numerical value also displays the msg
+* input('Enter a string : ' , 's');	// accepts a string also displays the msg
+
+
+* pause (2);			// holds the screen for the mentioned seconds
+
+------------------------------------------------------------------------------------
+
+note: result of the line without semicolon will be displayed just below that line
+      after pressing enter , ie semicolon is just used to run the line only during 
+      the time of whole program running.. 
+for example : imaqhwinfo('winvideo') will display its result beneath the line
+else if a semicolon is used the result will be executed but wont be displayed
+
+* imaqhwinfo('winvideo')          // runs and displays the result
+* imaqhwinfo('winvideo');         // only runs the code, wont display
+* disp(imaqhwinfo('winvideo'));   // displays the result 
+------------------------------------------------------------------------------------
+
+
+
+* imaqhwinfo //image aquisition hardware information of our sys (semicolon not needed when direct display is needed)
+
+
+ * imaqhwinfo(winvideo) // about camera with out semicolon
+displays the result as
+-> DeviceIDs: {[1]  [2]}
+which means two cameras are connected to the system
+-> DeviceIDs: {[1]  [2]  [3]}
+which means three cameras are connected to the system
+-> DeviceIDs: {[1]}
+which means only one camera is connected to the system
+
+
+* imaqhwinfo('winvideo',1)   // add device id
+ selects the required camera for action , initilises the cam
+
+* vid = videoinput('winvideo',1); 	// Stores the video response to the variable 'vid'
+* preview(vid);				// Displays the video in a terminal
+
+or the above can be written as
+
+* preview(videoinput('winvideo',1));
+  preview() command is used to preview the loaded content
+
+
+
+* vid = videoinput('winvideo',1);
+* i = getsnapshot(vid);			// takes a snap from the current video display
+* imshow(i);				// displays the image in YCBCR  format
+
+* rgb = ycbcr2rgb(i);			// converts ycbcr format img to rgb format
+* hsv = rgb2hsv(rgb);			// converts rgb format img to hsv format (hsv - hue, saturation, value)
+
+
+to seperate all the corresponding values of HSV
+
+* h = hsv(:,:,1);  // takes all values of HSV from y, x and 3
+* s = hsv(:,:,2);
+* v = hsv(:,:,3);
+
+
+* imtool(h);  // displays the image in hue mode so we can see the range of hue of a particular portion 
+* imtool(s);  // displays the image in saturation mode so we can see the range of saturation of a particular portion
+* imtool(v);  // displays the image in value mode so we can see the range of value of a particular portion
+
+
+
+To select a particular portion of an image -> called thresholding
+
+* z = h>0.40 & h<0.47;   // selects the img in hue mode within the specified range
+* imshow(z);
+
+* z = s>0.0 & s<0.1;   // selects the img in saturation mode within the specified range
+* imshow(z);
+
+* z = h>0.4 & s<0.1;
+* imshow(z);
+
+
+* vid = videoinput('winvideo','1','YUY2_320x240);		// for the required image size change (320x240) value
+
+
+
+image filtering
+
+* strel(z);
+* se = strel('disk' , 5);
+* o = imopen(z,se);
+* imshow(o);
+* c=imclose(o,se);
+
+
+
+============================================================================================================================================================
+
+
+
+[l , n] = bwlabel(c)    // black and white label, l gives the name of label, n gives the no of images
+
+
+
+for k=1:n   // for loop -> no inc operator needed -> here its ( for ( k= 1 to n)
+[row ,col] = find(l==k)  // gets the corresponding row nd col
+rbuf = mean(row);   // takes the mean value of row and stores in rbuf
+cbuf = mean(col);   // takes the mean value of col and stores in cbuf
+end
+
+
+
+=========================================================================================
+
+
+e = (cbuf>x1)8 + (cbuf<x2)4 + (rbuf>y1)2 + (rbuf<y2)
+
+1: 5
+2: 7
+3: 6
+4: 13
+5: 15
+6: 14
+7: 9
+8: 11
+9: 10
+
+
+===================================================================================================
+
+MOUSE
+------
+
+
+import java.awt.Robot;
+import java.awt.event.*;
+mouse = Robot;
+mouse.mouseMove(100,100);		// move the mouse to the mentioned cordinates
+
+
+
+
+
+=====================================================================================================
+ROBOT
+------
+
+
+ser serial('comxx');	//only for one time it can be initialised
+fopen(ser);
+fwrite(ser,'S');
+fclose(ser);
+
+=====================================================================================================
+Music Player
+-------------
+
+y =wavread('my_wav_file.wav'); 		// onlu reads wav file
+myplayer = audioplayer(y,44100);	// 44100 is the normal tempo of a song
+play(myplayer);
+pause(mplayer);
+stop(mplayer);
+
+
+
+======================================================================================================
+
+
+Pavan sir (tutor)
+
+mail id   : pavanshah@theexcelsior.in
+phone no  : 9820017265
+
+
+
+
+
+
+
